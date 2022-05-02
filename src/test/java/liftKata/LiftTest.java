@@ -45,4 +45,25 @@ public class LiftTest {
         Assert.assertEquals(lift.floor(), 1);
 
     }
+
+    @Test
+    public void calling_AfterARequest_ShouldAllowTheLiftToMoveAgain(){
+        lift.call(1, ANY_DIRECTION);
+        lift.request(2);
+
+        lift.call(3, ANY_DIRECTION);
+
+        Assert.assertEquals(lift.floor(), 3);
+    }
+
+    @Test
+    public void calling_aCalledLift_ShouldEventuallyGoToCall_AfterRequest(){
+        lift.call(1, ANY_DIRECTION);
+        lift.call(3, ANY_DIRECTION);
+
+        lift.request(2);
+
+        Assert.assertEquals(lift.floor(), 3);
+
+    }
 }
